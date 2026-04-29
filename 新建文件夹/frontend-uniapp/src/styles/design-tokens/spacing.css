@@ -1,0 +1,62 @@
+:root {
+  /* ===== Spacing Scale (in rpx) ===== */
+  
+  /* Micro spacing */
+  --space-1: 4rpx;
+  --space-2: 8rpx;
+  --space-3: 12rpx;
+  --space-4: 16rpx;
+  
+  /* Common spacing */
+  --space-5: 20rpx;
+  --space-6: 24rpx;
+  --space-8: 32rpx;
+  --space-10: 40rpx;
+  --space-12: 48rpx;
+  
+  /* Larger spacing */
+  --space-16: 64rpx;
+  --space-20: 80rpx;
+  --space-24: 96rpx;
+  
+  /* Common component spacing aliases */
+  --space-xs: var(--space-1);
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-6);
+  --space-xl: var(--space-8);
+  --space-2xl: var(--space-12);
+  
+  /* Layout spacing */
+  --page-padding: var(--space-6);
+  --page-padding-lg: var(--space-8);
+  --section-gap: var(--space-8);
+  --card-gap: var(--space-4);
+  --item-gap: var(--space-3);
+  
+  /* Component padding */
+  --card-padding: var(--space-6);
+  --card-padding-sm: var(--space-4);
+  --card-padding-lg: var(--space-8);
+  
+  --btn-padding-y: var(--space-3);
+  --btn-padding-x: var(--space-6);
+  
+  --input-padding-y: var(--space-4);
+  --input-padding-x: var(--space-4);
+}
+
+html.elder-mode,
+body.elder-mode,
+page.elder-mode {
+  /* Larger spacing for elder mode */
+  --space-1: 8rpx;
+  --space-2: 12rpx;
+  --space-3: 16rpx;
+  --space-4: 24rpx;
+  --space-6: 32rpx;
+  --space-8: 48rpx;
+  
+  --page-padding: var(--space-8);
+  --card-padding: var(--space-8);
+}

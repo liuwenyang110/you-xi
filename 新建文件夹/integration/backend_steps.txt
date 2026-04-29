@@ -1,0 +1,8 @@
+1. Create MySQL database `nongzhushou`.
+2. Ensure Redis is running on `127.0.0.1:6379`.
+3. Copy `.env.example` values into your local environment if needed.
+4. Start backend from `backend/` with `mvn spring-boot:run` or package + run jar.
+5. Verify:
+   - `GET /api/v1/auth/me`
+   - `GET /api/v1/debug/unified-match/{demandId}/eligible`
+   - `GET /api/v1/debug/unified-match/{demandId}/tiers`

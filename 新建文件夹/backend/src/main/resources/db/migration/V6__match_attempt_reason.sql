@@ -1,0 +1,2 @@
+ALTER TABLE match_attempt
+    ADD COLUMN IF NOT EXISTS match_reason VARCHAR(255) NULL;

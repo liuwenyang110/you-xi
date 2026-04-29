@@ -1,0 +1,38 @@
+{
+  "pages": [
+    { "path": "pages/common/home", "style": { "navigationBarTitleText": "农助平台", "navigationStyle": "custom" } },
+    { "path": "pages/common/login", "style": { "navigationBarTitleText": "登录", "navigationStyle": "custom" } },
+    { "path": "pages/common/role-select", "style": { "navigationBarTitleText": "选择身份", "navigationStyle": "custom" } },
+    { "path": "pages/common/zone-select", "style": { "navigationBarTitleText": "选择片区", "navigationStyle": "custom" } },
+    { "path": "pages/farmer/home", "style": { "navigationBarTitleText": "找机首页", "navigationStyle": "custom" } },
+    { "path": "pages/farmer/zone-home", "style": { "navigationBarTitleText": "片区农事", "navigationStyle": "custom", "enablePullDownRefresh": true } },
+    { "path": "pages/farmer/demand-publish", "style": { "navigationBarTitleText": "发布求助" } },
+    { "path": "pages/publish/demand", "style": { "navigationBarTitleText": "发布求助" } },
+    { "path": "pages/farmer/demand-list", "style": { "navigationBarTitleText": "我的求助", "enablePullDownRefresh": true } },
+    { "path": "pages/farmer/operator-list", "style": { "navigationBarTitleText": "服务者列表", "enablePullDownRefresh": true } },
+    { "path": "pages/farmer/operator-detail", "style": { "navigationBarTitleText": "服务者详情" } },
+    { "path": "pages/operator/zone-home", "style": { "navigationBarTitleText": "片区工作台", "navigationStyle": "custom", "enablePullDownRefresh": true } },
+    { "path": "pages/operator/machinery-manage", "style": { "navigationBarTitleText": "我的农机" } },
+    { "path": "pages/operator/demand-browse", "style": { "navigationBarTitleText": "浏览需求", "enablePullDownRefresh": true } },
+    { "path": "pages/profile/index", "style": { "navigationBarTitleText": "我的" } },
+    { "path": "pages/common/area-report", "style": { "navigationBarTitleText": "面积报告" } },
+    { "path": "pages/admin/zone-manage", "style": { "navigationBarTitleText": "片区管理", "enablePullDownRefresh": true } },
+    { "path": "pages/admin/user-manage", "style": { "navigationBarTitleText": "用户管理", "enablePullDownRefresh": true } },
+    { "path": "pages/admin/demand-monitor", "style": { "navigationBarTitleText": "公益监控", "enablePullDownRefresh": true } },
+    { "path": "pages/admin/dashboard", "style": { "navigationBarTitleText": "数据看板", "enablePullDownRefresh": true } },
+    { "path": "pages/admin/entry", "style": { "navigationBarTitleText": "管理入口" } },
+    { "path": "pages/common/teahouse", "style": { "navigationBarTitleText": "交流大厅", "navigationStyle": "custom" } },
+    { "path": "pages/common/notifications", "style": { "navigationBarTitleText": "消息中心", "enablePullDownRefresh": true } },
+    { "path": "pages/community/index", "style": { "navigationBarTitleText": "公益广场", "navigationStyle": "custom" } },
+    { "path": "pages/community/post-detail", "style": { "navigationBarTitleText": "详情" } },
+    { "path": "pages/volunteer/my-claims", "style": { "navigationBarTitleText": "我的帮扶", "navigationStyle": "custom" } },
+    { "path": "pages/community/sessions", "style": { "navigationBarTitleText": "协作会话", "navigationStyle": "custom" } },
+    { "path": "pages/community/chat", "style": { "navigationBarTitleText": "公益协作", "navigationStyle": "custom" } }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "农助平台",
+    "navigationBarBackgroundColor": "#EAF5EE",
+    "backgroundColor": "#F5F9F6"
+  }
+}

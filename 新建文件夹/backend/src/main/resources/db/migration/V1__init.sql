@@ -1,0 +1,79 @@
+CREATE TABLE IF NOT EXISTS user_account (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    phone VARCHAR(20) NOT NULL UNIQUE,
+    primary_role VARCHAR(20) NOT NULL,
+    current_role VARCHAR(20) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'NORMAL',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_real_auth (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    real_name VARCHAR(50) NOT NULL,
+    id_card_no VARCHAR(32) NOT NULL,
+    auth_status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS service_category (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    parent_id BIGINT DEFAULT 0,
+    category_name VARCHAR(100) NOT NULL,
+    category_code VARCHAR(50) NOT NULL,
+    sort_no INT NOT NULL DEFAULT 0,
+    enabled TINYINT NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS machine_type_dict (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    machine_name VARCHAR(100) NOT NULL,
+    horsepower_range VARCHAR(50),
+    enabled TINYINT NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS dynamic_field_template (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    template_type VARCHAR(20) NOT NULL,
+    ref_id BIGINT NOT NULL,
+    field_key VARCHAR(50) NOT NULL,
+    field_label VARCHAR(100) NOT NULL,
+    field_type VARCHAR(30) NOT NULL,
+    required_flag TINYINT NOT NULL DEFAULT 0,
+    options_json JSON NULL
+);
+
+CREATE TABLE IF NOT EXISTS equipment (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    owner_id BIGINT NOT NULL,
+    machine_type_id BIGINT NOT NULL,
+    equipment_name VARCHAR(100) NOT NULL,
+    brand_model VARCHAR(100),
+    quantity INT NOT NULL DEFAULT 1,
+    current_status VARCHAR(20) NOT NULL DEFAULT 'IDLE',
+    base_region_code VARCHAR(32),
+    service_radius_km INT DEFAULT 15,
+    approve_status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS demand (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    farmer_id BIGINT NOT NULL,
+    service_category_id BIGINT NOT NULL,
+    service_subcategory_id BIGINT NOT NULL,
+    crop_code VARCHAR(50),
+    area_mu DECIMAL(10, 2),
+    schedule_type VARCHAR(20),
+    village_name VARCHAR(100),
+    lat DECIMAL(10, 6),
+    lng DECIMAL(10, 6),
+    voice_asset_id BIGINT,
+    voice_text VARCHAR(1000),
+    requirement_json JSON,
+    status VARCHAR(30) NOT NULL DEFAULT 'PUBLISHED',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

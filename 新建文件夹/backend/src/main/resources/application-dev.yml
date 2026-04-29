@@ -1,0 +1,18 @@
+# ============================================================
+# 开发环境配置 (application-dev.yml)
+# ============================================================
+
+spring:
+  flyway:
+    clean-disabled: false   # 开发环境允许清理重建
+
+app:
+  auth:
+    mock-token-prefix: ${MOCK_TOKEN_PREFIX:mock-token-}   # 开发环境保留 mock 登录
+
+# 开发环境日志级别
+logging:
+  level:
+    com.nongzhushou: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG

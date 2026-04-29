@@ -1,0 +1,87 @@
+.chess-board-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 9 / 10;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background-color: #f4d03f;
+  border: 15px solid #5c3a21;
+}
+
+.wood-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(141, 90, 44, 0.1) 0px,
+    rgba(141, 90, 44, 0.1) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+.grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.grid-line {
+  position: absolute;
+  background-color: #5c3a21;
+}
+
+.h-line {
+  height: 2px;
+  transform: translateY(-1px);
+}
+
+.v-line {
+  width: 2px;
+  transform: translateX(-1px);
+}
+
+.diag-line {
+  position: absolute;
+  height: 2px;
+  background-color: #5c3a21;
+}
+
+.river {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'KaiTi', 'STKaiti', serif;
+  font-size: calc(var(--cell-size) * 0.6);
+  font-weight: bold;
+  color: #5c3a21;
+}
+
+.highlight-dot {
+  position: absolute;
+  width: calc(var(--cell-size) * 0.3);
+  height: calc(var(--cell-size) * 0.3);
+  background-color: rgba(0, 255, 0, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 15;
+  box-shadow: 0 0 8px rgba(0,255,0,0.8);
+  transition: transform 0.2s;
+}
+
+.highlight-dot:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  background-color: rgba(0, 255, 0, 0.8);
+}

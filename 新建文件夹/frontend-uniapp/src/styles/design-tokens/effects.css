@@ -1,0 +1,62 @@
+:root {
+  /* Shadows - Refined depth system */
+  --shadow-none: 0 0 #0000;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  --shadow-base: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 12rpx 24rpx rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 24rpx 48rpx rgba(0, 0, 0, 0.1);
+  --shadow-colored: 0 8rpx 16rpx rgba(16, 185, 129, 0.15);
+  --shadow-warm: 0 8rpx 16rpx rgba(245, 158, 11, 0.1);
+  --shadow-inner: inset 0 2rpx 4rpx rgba(0, 0, 0, 0.04);
+
+  /* Radius */
+  --radius-sm: 8rpx;
+  --radius-md: 12rpx;
+  --radius-lg: 16rpx;
+  --radius-xl: 20rpx;
+  --radius-2xl: 24rpx;
+  --radius-3xl: 32rpx;
+  --radius-full: 9999px;
+
+  /* Glassmorphism Backdrop Blurs */
+  --blur-sm: 8px;
+  --blur-md: 16px;
+  --blur-lg: 24px;
+  --blur-xl: 40px;
+
+  /* Animation Timings */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  --duration-100: 100ms;
+  --duration-200: 200ms;
+  --duration-300: 300ms;
+  --duration-500: 500ms;
+  --duration-700: 700ms;
+  --duration-1000: 1000ms;
+
+  /* Gradient presets */
+  --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-strong) 100%);
+  --gradient-warm: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(245, 158, 11, 0.04) 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(59, 130, 246, 0.04) 50%, rgba(245, 158, 11, 0.03) 100%);
+  --gradient-surface: linear-gradient(180deg, #FFFFFF 0%, #F7F8FA 100%);
+}
+
+html.elder-mode,
+body.elder-mode,
+page.elder-mode {
+  --shadow-base: 0 8rpx 24rpx rgba(0, 0, 0, 0.08); /* Higher contrast shadows for elder */
+  --shadow-md: 0 10rpx 30rpx rgba(0, 0, 0, 0.06);
+  --shadow-colored: 0 10rpx 24rpx rgba(22, 32, 18, 0.16);
+  --radius-2xl: 20rpx; /* Slightly boxier for visibility */
+  --radius-3xl: 24rpx;
+  
+  /* Slower animations for elder mode - less jarring */
+  --duration-200: 300ms;
+  --duration-300: 500ms;
+  --duration-500: 800ms;
+}

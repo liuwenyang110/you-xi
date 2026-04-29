@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongzhushou.match.mapper.MatchRuleQueryMapper">
+
+    <select id="selectDemandMatchView" resultType="com.nongzhushou.match.model.DemandMatchView">
+        SELECT
+            d.id AS demandId,
+            d.service_category_id AS serviceCategoryId,
+            d.service_subcategory_id AS serviceSubcategoryId,
+            d.crop_code AS cropCode,
+            d.area_mu AS areaMu,
+            d.lat AS lat,
+            d.lng AS lng,
+            CAST(d.requirement_json AS CHAR) AS requirementJson
+        FROM demand d
+        WHERE d.id = #{demandId}
+          AND d.status IN ('MATCHING','WAIT_FARMER_CONTACT_CONFIRM','WAITING_FARMER_CONFIRM')
+        LIMIT 1
+    </select>
+
+    <select id="selectEligibleBasePool" resultType="com.nongzhushou.match.model.ServiceItemMatchView">
+        SELECT
+            si.id AS serviceItemId,
+            si.owner_id AS ownerId,
+            si.service_category_id AS serviceCategoryId,
+            si.service_subcategory_id AS serviceSubcategoryId,
+            si.main_equipment_id AS mainEquipmentId,
+            CASE WHEN si.is_accepting_orders = 1 THEN 1 ELSE 0 END AS ownerAccepting,
+            CASE WHEN si.status = 'ACTIVE' AND si.approve_status = 'PASSED' THEN 1 ELSE 0 END AS serviceItemActive,
+            CASE WHEN ura.id IS NULL OR ura.auth_status = 'PASSED' THEN 1 ELSE 0 END AS realnamePassed,
+            CASE WHEN e.current_status = 'IDLE' THEN 1 ELSE 0 END AS equipmentIdle,
+            e.current_lat AS ownerLat,
+            e.current_lng AS ownerLng,
+            COALESCE(si.service_radius_km, e.service_radius_km, 15) AS serviceRadiusKm,
+            si.min_area_mu AS minAreaMu,
+            si.max_area_mu AS maxAreaMu,
+            si.crop_tags AS cropTagsRaw,
+            si.terrain_tags AS terrainTagsRaw,
+            si.plot_tags AS plotTagsRaw
+        FROM service_item si
+        JOIN equipment e ON e.id = si.main_equipment_id
+        LEFT JOIN user_real_auth ura ON ura.user_id = si.owner_id
+        WHERE si.service_subcategory_id = #{subcategoryId}
+          AND si.status = 'ACTIVE'
+          AND si.approve_status = 'PASSED'
+    </select>
+
+    <select id="countActiveOrdersByOwner" resultType="int">
+        SELECT COUNT(1)
+        FROM order_info
+        WHERE owner_id = #{ownerId}
+          AND status IN ('WAIT_NEGOTIATION','SCHEDULED','IN_SERVICE','WAIT_BOTH_FINISH','SERVING','FINISHED_PENDING_CONFIRM')
+    </select>
+
+    <select id="countActiveContactsByDemand" resultType="int">
+        SELECT COUNT(1)
+        FROM contact_session
+        WHERE demand_id = #{demandId}
+          AND status IN ('WAIT_FARMER_CONFIRM','WAITING_FARMER_CONFIRM','CONTACT_ACTIVE','NEGOTIATING','CONFIRMED')
+    </select>
+
+    <select id="countTriedOwnerByDemand" resultType="int">
+        SELECT COUNT(1)
+        FROM match_attempt
+        WHERE demand_id = #{demandId}
+          AND owner_id = #{ownerId}
+          AND status IN ('PENDING_RESPONSE','OWNER_ACCEPTED','OWNER_REJECTED','OWNER_TIMEOUT','WAIT_FARMER_CONFIRM','FARMER_TIMEOUT','EXPIRED','CONTACT_OPENED')
+    </select>
+
+</mapper>

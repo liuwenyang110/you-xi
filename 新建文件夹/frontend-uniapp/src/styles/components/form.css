@@ -1,0 +1,88 @@
+/* General Form Styles */
+.form-group {
+  margin-bottom: 32rpx;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-regular);
+  margin-bottom: 12rpx;
+}
+
+.form-input-box {
+  position: relative;
+  width: 100%;
+}
+
+.form-input {
+  width: 100%;
+  height: 100rpx;
+  background: var(--page-bg);
+  border: 1px solid var(--border-regular);
+  border-radius: var(--radius-lg);
+  padding: 0 28rpx;
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  transition: all var(--duration-200) var(--ease-in-out);
+}
+
+.form-input::placeholder {
+  color: var(--text-soft);
+}
+
+/* Focus state simulated by JS or pseudo (usually inputs handle focus in uniapp directly) */
+.form-input:focus,
+.form-input.is-focused {
+  border-color: var(--primary-color);
+  background: var(--surface-deep);
+  box-shadow: 0 0 0 4rpx rgba(16, 185, 129, 0.1);
+}
+
+.form-input:disabled {
+  background: var(--page-bg);
+  color: var(--text-soft);
+  opacity: 0.7;
+}
+
+/* Form Helper & Error Texts */
+.form-help {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 10rpx;
+  line-height: var(--leading-relaxed);
+}
+
+.form-error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: 10rpx;
+}
+
+html.elder-mode .form-input,
+body.elder-mode .form-input,
+page.elder-mode .form-input {
+  height: 120rpx;
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-md);
+  border-width: 2px;
+}
+
+html.elder-mode .form-input:focus,
+body.elder-mode .form-input:focus,
+page.elder-mode .form-input:focus {
+  box-shadow: 0 0 0 6rpx rgba(16, 185, 129, 0.18);
+  border-color: var(--primary-strong);
+}
+
+html.elder-mode .form-label,
+body.elder-mode .form-label,
+page.elder-mode .form-label {
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  margin-bottom: 16rpx;
+}

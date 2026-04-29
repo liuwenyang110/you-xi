@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongzhushou.matchflow.mapper.MatchTaskFlowMapper">
+
+    <select id="selectTaskByDemandId" resultType="com.nongzhushou.matchflow.model.MatchTaskLite">
+        SELECT id, demand_id AS demandId, current_tier AS currentTier, status
+        FROM match_task
+        WHERE demand_id = #{demandId}
+        LIMIT 1
+    </select>
+
+    <insert id="insertMatchTask" parameterType="com.nongzhushou.matchflow.model.MatchTaskLite" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO match_task (demand_id, current_tier, status, created_at, updated_at)
+        VALUES (#{demandId}, #{currentTier}, #{status}, NOW(), NOW())
+    </insert>
+
+    <update id="updateTaskTierAndStatus">
+        UPDATE match_task
+        SET current_tier = #{tierNo}, status = #{status}, updated_at = NOW()
+        WHERE id = #{taskId}
+    </update>
+
+    <update id="markTaskSuccess">
+        UPDATE match_task
+        SET status = 'SUCCESS',
+            success_owner_id = #{ownerId},
+            success_service_item_id = #{serviceItemId},
+            ended_at = NOW(),
+            updated_at = NOW()
+        WHERE id = #{taskId}
+    </update>
+
+    <update id="markTaskFailed">
+        UPDATE match_task
+        SET status = 'FAILED',
+            fail_reason = #{failReason},
+            ended_at = NOW(),
+            updated_at = NOW()
+        WHERE id = #{taskId}
+    </update>
+
+    <insert id="insertMatchAttempt" parameterType="com.nongzhushou.matchflow.model.MatchAttemptLite" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO match_attempt
+        (task_id, demand_id, owner_id, service_item_id, tier_no, distance_meter, distance_source, route_distance_km, straight_distance_km, eta_minutes, match_reason, service_name, village_name, distance_layer, status, response_deadline_seconds, owner_response_deadline, created_at, updated_at)
+        VALUES
+        (#{taskId}, #{demandId}, #{ownerId}, #{serviceItemId}, #{tierNo}, #{distanceMeter}, #{distanceSource}, #{routeDistanceKm}, #{straightDistanceKm}, #{etaMinutes}, #{matchReason}, #{serviceName}, #{villageName}, #{distanceLayer}, #{status}, 120, #{ownerResponseDeadline}, NOW(), NOW())
+    </insert>
+
+    <select id="selectAttemptById" resultType="com.nongzhushou.matchflow.model.MatchAttemptLite">
+        SELECT
+            id, task_id AS taskId, demand_id AS demandId, owner_id AS ownerId,
+            service_item_id AS serviceItemId, tier_no AS tierNo, distance_meter AS distanceMeter,
+            distance_source AS distanceSource, route_distance_km AS routeDistanceKm,
+            straight_distance_km AS straightDistanceKm, eta_minutes AS etaMinutes, match_reason AS matchReason,
+            service_name AS serviceName, village_name AS villageName, distance_layer AS distanceLayer,
+            status, owner_response_deadline AS ownerResponseDeadline, farmer_confirm_deadline AS farmerConfirmDeadline
+        FROM match_attempt
+        WHERE id = #{attemptId}
+        LIMIT 1
+    </select>
+
+    <update id="updateAttemptStatus">
+        UPDATE match_attempt
+        SET status = #{status}, updated_at = NOW()
+        WHERE id = #{attemptId}
+    </update>
+
+    <update id="closeAttempt">
+        UPDATE match_attempt
+        SET status = #{status}, close_reason = #{status}, handled_at = NOW(), updated_at = NOW()
+        WHERE id = #{attemptId}
+    </update>
+
+    <insert id="insertContactSession" parameterType="com.nongzhushou.matchflow.model.ContactSessionLite" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO contact_session
+        (demand_id, match_attempt_id, owner_id, farmer_id, service_item_id, status, active_flag, masked_phone, contact_mode, expire_at, created_at, updated_at)
+        VALUES
+        (#{demandId}, #{matchAttemptId}, #{ownerId}, #{farmerId}, #{serviceItemId}, #{sessionStatus}, 1, '170****0002', #{contactMode}, #{expireAt}, NOW(), NOW())
+    </insert>
+
+    <select id="selectContactSessionByAttemptId" resultType="com.nongzhushou.matchflow.model.ContactSessionLite">
+        SELECT
+            id, demand_id AS demandId, owner_id AS ownerId, farmer_id AS farmerId,
+            service_item_id AS serviceItemId, match_attempt_id AS matchAttemptId,
+            status AS sessionStatus, contact_mode AS contactMode, expire_at AS expireAt
+        FROM contact_session
+        WHERE match_attempt_id = #{attemptId}
+        LIMIT 1
+    </select>
+
+    <update id="updateContactSessionStatus">
+        UPDATE contact_session
+        SET status = #{status},
+            active_flag = CASE
+                WHEN #{status} IN ('CLOSED', 'EXPIRED') THEN 0
+                ELSE active_flag
+            END,
+            confirmed_at = CASE
+                WHEN #{status} = 'CONTACT_ACTIVE' THEN NOW()
+                ELSE confirmed_at
+            END,
+            updated_at = NOW()
+        WHERE id = #{sessionId}
+    </update>
+
+    <insert id="insertOrder" parameterType="com.nongzhushou.matchflow.model.OrderLite" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO order_info
+        (demand_id, match_attempt_id, farmer_id, owner_id, service_item_id, contact_session_id, status, owner_confirmed_finish, farmer_confirmed_finish, created_at, updated_at)
+        VALUES
+        (#{demandId}, #{matchAttemptId}, #{farmerId}, #{ownerId}, #{serviceItemId}, #{contactSessionId}, #{status}, 0, 0, NOW(), NOW())
+    </insert>
+
+    <update id="updateDemandStatus">
+        UPDATE demand
+        SET status = #{status}, updated_at = NOW()
+        WHERE id = #{demandId}
+    </update>
+
+    <select id="selectFarmerIdByDemandId" resultType="long">
+        SELECT farmer_id FROM demand WHERE id = #{demandId} LIMIT 1
+    </select>
+
+    <select id="selectOwnerTimeoutAttemptIds" resultType="long">
+        SELECT id
+        FROM match_attempt
+        WHERE status = 'PENDING_RESPONSE'
+          AND owner_response_deadline IS NOT NULL
+          AND owner_response_deadline &lt; NOW()
+    </select>
+
+    <select id="selectFarmerTimeoutAttemptIds" resultType="long">
+        SELECT ma.id
+        FROM match_attempt ma
+        JOIN contact_session cs ON cs.match_attempt_id = ma.id
+        WHERE ma.status = 'WAIT_FARMER_CONFIRM'
+          AND cs.status IN ('WAIT_FARMER_CONFIRM', 'WAITING_FARMER_CONFIRM')
+          AND cs.expire_at IS NOT NULL
+          AND cs.expire_at &lt; NOW()
+    </select>
+
+</mapper>

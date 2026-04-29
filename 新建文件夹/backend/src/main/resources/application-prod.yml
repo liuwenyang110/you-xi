@@ -1,0 +1,25 @@
+# ============================================================
+# 生产环境配置 (application-prod.yml)
+# ============================================================
+
+spring:
+  flyway:
+    clean-disabled: true    # 生产环境禁止清理数据库
+
+app:
+  auth:
+    mock-token-prefix: ""   # 生产环境禁用 mock 登录
+
+# 生产环境禁止暴露 Actuator 敏感信息
+management:
+  endpoint:
+    health:
+      show-details: never
+
+# 生产环境日志：只记录 WARN 及以上
+logging:
+  level:
+    root: WARN
+    com.nongzhushou: INFO
+    org.springframework.web: WARN
+    org.springframework.security: WARN

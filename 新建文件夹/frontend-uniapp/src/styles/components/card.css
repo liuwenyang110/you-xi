@@ -1,0 +1,216 @@
+/* Card Component - Glassmorphism & Depth (v2.1 Upgraded) */
+.card {
+  background: var(--surface-deep);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border-light);
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: var(--shadow-base);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--duration-200) var(--ease-in-out), box-shadow var(--duration-200) var(--ease-in-out);
+}
+
+.card:active {
+  transform: scale(0.99) translateY(2rpx);
+}
+
+.card:not(:active):hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2rpx);
+}
+
+/* ==================== Glassmorphism Variants ==================== */
+
+/* Standard Glass Card */
+.card-glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(var(--blur-md)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), var(--shadow-sm);
+}
+
+/* Deep Glass - for status/overlay cards */
+.card-glass-deep {
+  background: rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(var(--blur-lg)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--blur-lg)) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 12rpx 40rpx -12rpx rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Glass - for bottom panels overlaying maps/images */
+.card-glass-dark {
+  background: rgba(10, 25, 12, 0.88);
+  backdrop-filter: blur(var(--blur-lg)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--blur-lg)) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-md);
+}
+
+/* Dark glass item - for list items in dark panels */
+.item-glass-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+}
+
+/* Tinted Glass - green welfare accent */
+.card-glass-green {
+  background: rgba(16, 185, 129, 0.05);
+  backdrop-filter: blur(var(--blur-md)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--blur-md)) saturate(160%);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), var(--shadow-sm);
+}
+
+/* ==================== Status Cards ==================== */
+
+/* Frosted status card - replaces plain colored status tags in lists */
+.card-status {
+  padding: 24rpx 28rpx;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(var(--blur-sm)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--blur-sm)) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.02);
+  transition: all var(--duration-200) var(--ease-out);
+}
+
+.card-status:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Status tones over glass */
+.card-status-pending {
+  background: rgba(254, 243, 199, 0.45);
+  border-color: rgba(245, 158, 11, 0.15);
+}
+
+.card-status-active {
+  background: rgba(219, 234, 254, 0.45);
+  border-color: rgba(59, 130, 246, 0.15);
+}
+
+.card-status-success {
+  background: rgba(209, 250, 229, 0.45);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.card-status-warn {
+  background: rgba(254, 226, 226, 0.45);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+/* ==================== Feature Card ==================== */
+
+.card-hero {
+  background: var(--surface-deep);
+  border: none;
+  box-shadow: 0 4rpx 20rpx -4rpx rgba(16, 185, 129, 0.12);
+  padding: 40rpx;
+}
+
+/* Gradient hero banner for special sections */
+.card-hero-gradient {
+  background: linear-gradient(135deg,
+    rgba(16, 185, 129, 0.06) 0%,
+    rgba(245, 158, 11, 0.04) 50%,
+    rgba(59, 130, 246, 0.03) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.08);
+  padding: 40rpx;
+}
+
+/* ==================== Micro-animations ==================== */
+
+/* Staggered entrance */
+.scene-enter {
+  animation: scene-slide-in var(--duration-500) var(--ease-out) both;
+}
+
+.scene-enter.delay-1 { animation-delay: 60ms; }
+.scene-enter.delay-2 { animation-delay: 120ms; }
+.scene-enter.delay-3 { animation-delay: 180ms; }
+.scene-enter.delay-4 { animation-delay: 240ms; }
+.scene-enter.delay-5 { animation-delay: 300ms; }
+.scene-enter.delay-6 { animation-delay: 360ms; }
+
+@keyframes scene-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer loading effect */
+.card-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; bottom: 0;
+  width: 60%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Subtle float for featured cards */
+.card-float {
+  animation: subtle-float 4s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6rpx); }
+}
+
+/* ==================== Elder Mode ==================== */
+
+html.elder-mode .card,
+body.elder-mode .card,
+page.elder-mode .card {
+  background: linear-gradient(180deg, rgba(255, 249, 221, 0.98), rgba(255, 243, 195, 0.94));
+  box-shadow: 0 0 0 2px rgba(35, 50, 24, 0.14), var(--shadow-base);
+  border: none;
+  border-radius: var(--radius-xl);
+  padding: 36rpx;
+}
+
+/* Disable glass effects in elder mode - use solid backgrounds */
+html.elder-mode .card-glass,
+body.elder-mode .card-glass,
+page.elder-mode .card-glass,
+html.elder-mode .card-glass-deep,
+body.elder-mode .card-glass-deep,
+page.elder-mode .card-glass-deep,
+html.elder-mode .card-glass-green,
+body.elder-mode .card-glass-green,
+page.elder-mode .card-glass-green {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: linear-gradient(180deg, rgba(255, 249, 221, 0.98), rgba(255, 243, 195, 0.94));
+}
+
+/* Elder mode: disable float animation (reduces visual noise) */
+html.elder-mode .card-float,
+body.elder-mode .card-float,
+page.elder-mode .card-float {
+  animation: none;
+}

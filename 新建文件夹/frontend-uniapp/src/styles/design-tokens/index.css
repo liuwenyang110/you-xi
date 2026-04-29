@@ -1,0 +1,41 @@
+/* 
+ * 农助手 V2 极简设计资产库
+ * 由第二战区：Claude Opus 4.6 (UI Designer) 编写
+ * 引入 @skills/ui-tokens 与 @skills/minimalist-ui 规范
+ */
+
+/* 1. 导入单个设计令牌 */
+@import './colors.css';
+@import './typography.css';
+@import './effects.css';
+@import './spacing.css';
+
+/* 2. 全局核心通用样式定义 */
+:root {
+  /* 玻璃拟态 (Glassmorphism) 特效变量 - 全局组件复用 */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.4);
+  --glass-blur: blur(12px);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* 核心玻璃卡片类 */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-2xl);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: var(--card-padding);
+  transition: all var(--duration-300) var(--ease-in-out);
+}
+
+/* Lottie 动画外框容器规范 */
+.lottie-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300rpx;
+}

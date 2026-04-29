@@ -1,0 +1,14 @@
+1. Open `frontend-uniapp/` in HBuilderX or uni-app CLI.
+2. Confirm `api/request.js` points to `http://localhost:8080/api/v1`.
+3. Start with `/pages/common/login`.
+4. Demo farmer flow:
+   - login
+   - create demand
+   - matching
+   - contact confirm
+   - order detail
+5. Demo owner flow:
+   - login
+   - owner home
+   - dispatch detail
+   - accept or reject

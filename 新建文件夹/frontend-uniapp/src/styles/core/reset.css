@@ -1,0 +1,44 @@
+/* Reset and Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, page {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+view, text, image, scroll-view, input, button {
+  box-sizing: border-box;
+}
+
+input {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  outline: none;
+}
+
+button::after {
+  border: none;
+}
+
+image {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+

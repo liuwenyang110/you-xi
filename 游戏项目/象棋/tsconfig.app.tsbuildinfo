@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/chessboard.tsx","./src/components/chessboardcanvas.tsx","./src/components/chesspiece.tsx","./src/hooks/usegame.ts","./src/logic/ai.ts","./src/logic/board.ts","./src/logic/gamemanager.ts","./src/logic/rules.ts","./src/models/types.ts","./src/utils/audio.ts","./src/utils/storage.ts"],"version":"5.9.3"}

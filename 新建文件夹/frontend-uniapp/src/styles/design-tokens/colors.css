@@ -1,0 +1,85 @@
+:root {
+  /* ===== 公益绿色系 #2D7A4F — 农助手公益平台主色 ===== */
+  --primary-hue: 150;
+  --primary-sat: 46%;
+  --primary-lit: 33%;
+
+  --primary-color: #2D7A4F;           /* 公益深绿 */
+  --primary-strong: #1A4A30;          /* 公益更深绿（用于 hover/按钮强调） */
+  --primary-light: #EAF5EE;           /* 公益浅绿（卡片背景、徽章） */
+  --primary-faint: #F5F9F6;           /* 公益极浅绿（页面背景） */
+
+  /* 辅助绿色 */
+  --primary-mid: #5BA88A;             /* 中间过渡绿（渐变辅色） */
+
+  --secondary-color: #F3F4F6;
+  --secondary-strong: #C3E6D0;        /* 公益绿色边框 */
+
+  /* 公益平台不需要金色强调，保留为备用 */
+  --accent-gold: #F59E0B;
+  --accent-gold-light: rgba(245, 158, 11, 0.08);
+  --accent-warm: #FDB913;
+
+  /* 语义色彩 / Neutral Palette */
+  --text-primary: #1A3A28;            /* 深绿色文字（相比纯黑更有品牌感） */
+  --text-regular: #2D5A3D;
+  --text-muted: #6B8F7A;
+  --text-soft: #A0C4B5;
+
+  --surface-deep: #FFFFFF;
+  --surface-tint: rgba(255, 255, 255, 1);
+  --surface-frosted: rgba(255, 255, 255, 0.85);
+  --page-bg: #F5F9F6;                 /* 公益米绿背景 */
+
+  --border-light: rgba(45, 122, 79, 0.05);
+  --border-regular: rgba(45, 122, 79, 0.12);
+  --border-focus: rgba(45, 122, 79, 0.35);
+
+  /* Status Colors */
+  --color-success: #2D7A4F;           /* 成功=公益绿 */
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Status Background Colors */
+  --color-success-bg: rgba(234, 245, 238, 0.8);  /* 公益浅绿背景 */
+  --color-warning-bg: rgba(254, 243, 199, 0.55);
+  --color-error-bg: rgba(254, 226, 226, 0.55);
+  --color-info-bg: rgba(219, 234, 254, 0.55);
+
+  /* Glass-specific shadow */
+  --shadow-glass: 0 16rpx 40rpx rgba(45, 122, 79, 0.06);
+
+  /* 渐变预设 */
+  --gradient-primary: linear-gradient(135deg, #2D7A4F 0%, #1A4A30 100%);
+  --gradient-hero: linear-gradient(160deg, #1A4A30 0%, #2D7A4F 60%, #5BA88A 100%);
+}
+
+html.elder-mode,
+body.elder-mode,
+page.elder-mode {
+  --primary-color: #047857;
+  --primary-strong: #064E3B;
+  --primary-light: #ECFDF5;
+  --primary-faint: #F0FDF4;
+  --text-primary: #111111;
+  --text-regular: #2F3437;
+  --text-muted: #4B5563;
+  --text-soft: #6B7280;
+  --page-bg: #F3F4F6;
+  --surface-frosted: rgba(255, 255, 255, 0.95);
+  --border-light: rgba(0, 0, 0, 0.05);
+  --border-regular: rgba(0, 0, 0, 0.12);
+  --border-focus: rgba(5, 150, 105, 0.4);
+
+  /* 状态色 — 老年模式加深提高对比度 */
+  --color-success: #047857;
+  --color-warning: #D97706;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
+
+  --color-success-bg: rgba(209, 250, 229, 0.75);
+  --color-warning-bg: rgba(254, 243, 199, 0.75);
+  --color-error-bg: rgba(254, 226, 226, 0.75);
+  --color-info-bg: rgba(219, 234, 254, 0.75);
+}

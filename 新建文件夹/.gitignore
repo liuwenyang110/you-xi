@@ -1,0 +1,60 @@
+# ============================================================
+# 农助手项目 .gitignore
+# ============================================================
+
+# ---------- IDE / Editor ----------
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ---------- Java / Maven ----------
+target/
+*.class
+*.jar
+*.war
+*.log
+*.tmp
+
+# ---------- Node / Frontend ----------
+node_modules/
+dist/
+.nuxt/
+.output/
+*.local
+
+# ---------- Environment & Secrets ----------
+.env
+.env.local
+.env.*.local
+start-local.ps1
+
+# ---------- Log files ----------
+*.out.log
+*.err.log
+backend-run.*.log
+backend.*.log
+backend_startup.*.log
+compile_log.txt
+npm-debug.log*
+
+# ---------- Generated / Temp ----------
+tmp/
+output/
+.playwright-cli/
+temp_*/
+
+# ---------- AI / Agent metadata ----------
+.gemini/
+_agents/
+claude-code/
+everything-claude-code/

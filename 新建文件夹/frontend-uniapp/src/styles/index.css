@@ -1,0 +1,28 @@
+/* 1. Design Tokens - 统一从入口文件导入 */
+@import './design-tokens/index.css';
+
+/* 2. Core Styles */
+@import './core/reset.css';
+@import './core/animations.css';
+@import './core/utilities.css';
+
+/* 3. Component Styles */
+@import './components/button.css';
+@import './components/card.css';
+@import './components/form.css';
+@import './components/layout.css';
+
+/* 4. Local tweaks for mobile readability */
+page {
+  color: var(--text-primary);
+  background: var(--page-bg);
+  font-size: var(--font-base);
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+button {
+  font-size: var(--font-base);
+  font-family: inherit;
+}

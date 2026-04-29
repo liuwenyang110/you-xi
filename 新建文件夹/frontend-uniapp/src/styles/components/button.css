@@ -1,0 +1,86 @@
+/* Base Button Rules */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  padding: 0 40rpx;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-xl);
+  transition: all var(--duration-200) var(--ease-in-out);
+  letter-spacing: 2rpx;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.97) translateY(2rpx);
+}
+
+.btn-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Primary Button - High tech gradient */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-strong));
+  color: #ffffff;
+  box-shadow: var(--shadow-colored);
+  border: none;
+}
+
+.btn-primary:active {
+  box-shadow: var(--shadow-md);
+  opacity: 0.9;
+}
+
+/* Secondary Button - Outline / Soft background */
+.btn-secondary {
+  background: var(--surface-deep);
+  color: var(--primary-strong);
+  border: 2rpx solid var(--primary-color);
+}
+
+.btn-secondary:active {
+  background: var(--page-bg);
+}
+
+/* Text / Ghost Button */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-regular);
+}
+
+.btn-ghost:active {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Elder Mode Adjustments - 120rpx touch target per PRD v2.1 */
+html.elder-mode .btn,
+body.elder-mode .btn,
+page.elder-mode .btn {
+  height: 120rpx;
+  min-height: 120rpx;
+  border-radius: var(--radius-xl);
+  font-size: var(--text-xl);
+  font-weight: var(--font-extrabold);
+  box-shadow: var(--shadow-colored);
+  letter-spacing: 4rpx;
+}
+
+html.elder-mode .btn:active,
+body.elder-mode .btn:active,
+page.elder-mode .btn:active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Elder mode primary button: extra glow ring */
+html.elder-mode .btn-primary,
+body.elder-mode .btn-primary,
+page.elder-mode .btn-primary {
+  box-shadow: 0 0 0 4rpx rgba(45, 122, 79, 0.25), var(--shadow-colored);
+}

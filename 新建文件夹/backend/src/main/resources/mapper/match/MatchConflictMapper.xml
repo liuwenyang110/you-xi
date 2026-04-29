@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongzhushou.match.mapper.MatchConflictMapper">
+
+    <select id="countActiveOrdersByOwner" resultType="int">
+        SELECT COUNT(1)
+        FROM order_info
+        WHERE owner_id = #{ownerId}
+          AND status IN ('WAIT_NEGOTIATION','SCHEDULED','IN_SERVICE','WAIT_BOTH_FINISH','SERVING','FINISHED_PENDING_CONFIRM')
+    </select>
+
+    <select id="countActiveContactsByDemand" resultType="int">
+        SELECT COUNT(1)
+        FROM contact_session
+        WHERE demand_id = #{demandId}
+          AND status IN ('WAIT_FARMER_CONFIRM','WAITING_FARMER_CONFIRM','CONTACT_ACTIVE','NEGOTIATING','CONFIRMED')
+    </select>
+
+    <select id="countTriedOwnerByDemand" resultType="int">
+        SELECT COUNT(1)
+        FROM match_attempt
+        WHERE demand_id = #{demandId}
+          AND owner_id = #{ownerId}
+          AND status IN (
+            'PENDING_RESPONSE','OWNER_ACCEPTED','OWNER_REJECTED',
+            'OWNER_TIMEOUT','FARMER_TIMEOUT','EXPIRED'
+          )
+    </select>
+
+</mapper>

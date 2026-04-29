@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Layout Components — 页面结构与布局框架
+   ========================================================================== */
+
+/* ── Page Container ──────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  animation: page-fade-in var(--duration-300) var(--ease-out);
+  /* Desktop rendering / web-view constraint */
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Padded page with safe-area ────────────────────── */
+.page-padded {
+  padding: 24rpx 28rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom, 0px));
+}
+
+/* ── Section Block ──────────────────────────────────── */
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: 20rpx;
+}
+
+.section-subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: 16rpx;
+}
+
+/* ── Container (centered content block) ─────────────── */
+.container {
+  width: 100%;
+  padding: 0 28rpx;
+  box-sizing: border-box;
+}
+
+/* ── Divider ─────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 24rpx 0;
+}
+
+/* ── Safe-area bottom spacer (for fixed bottom bars) ── */
+.safe-bottom {
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom, 0px));
+}
+
+/* ── Fixed bottom action bar ─────────────────────────── */
+.fixed-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 28rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom, 0px));
+  background: var(--surface-frosted);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+  border-top: 1px solid var(--border-light);
+  z-index: 100;
+}
+
+/* ── Elder Mode ───────────────────────────────────────── */
+html.elder-mode .section-title,
+body.elder-mode .section-title,
+page.elder-mode .section-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+}
+
+html.elder-mode .page-padded,
+body.elder-mode .page-padded,
+page.elder-mode .page-padded {
+  padding: 28rpx 32rpx;
+}

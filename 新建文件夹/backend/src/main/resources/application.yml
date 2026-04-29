@@ -1,0 +1,86 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  application:
+    name: nong-helper
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DB:nongzhushou}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      database: ${REDIS_DB:0}
+      timeout: ${REDIS_TIMEOUT:3s}
+  flyway:
+    enabled: ${FLYWAY_ENABLED:true}
+    locations: classpath:db/migration
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+
+app:
+  auth:
+    mock-token-prefix: ${MOCK_TOKEN_PREFIX:mock-token-}
+  jwt:
+    secret: ${JWT_SECRET}
+    expire-ms: ${JWT_EXPIRE_MS:604800000}
+  map:
+    gaode-enabled: ${GAODE_ENABLED:true}
+    gaode-api-key: ${GAODE_MAP_API_KEY:}
+    geocode-url: ${GAODE_GEOCODE_URL:https://restapi.amap.com/v3/geocode/geo}
+    driving-url: ${GAODE_DRIVING_URL:https://restapi.amap.com/v3/direction/driving}
+    input-tips-url: ${GAODE_INPUT_TIPS_URL:https://restapi.amap.com/v3/assistant/inputtips}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080}
+
+aliyun:
+  sms:
+    access-key: ${ALIYUN_SMS_AK:}
+    secret-key: ${ALIYUN_SMS_SK:}
+    sign-name: ${ALIYUN_SMS_SIGN_NAME:农助手}
+    template-code: ${ALIYUN_SMS_TEMPLATE_CODE:}
+    verify-template-code: ${ALIYUN_SMS_VERIFY_TEMPLATE_CODE:}
+
+  # RabbitMQ 消息队列（V3 MVP 暂不启用）
+  # rabbitmq:
+  #   host: ${RABBITMQ_HOST:localhost}
+  #   port: ${RABBITMQ_PORT:5672}
+  #   username: ${RABBITMQ_USER:guest}
+  #   password: ${RABBITMQ_PASS:guest}
+
+# Actuator 健康检查
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+  # Zipkin 链路追踪（V3 MVP 暂不启用）
+  # tracing:
+  #   sampling:
+  #     probability: 1.0
+  # zipkin:
+  #   tracing:
+  #     endpoint: http://localhost:9411/api/v2/spans
+
+# SpringDoc API 文档 (V3 MVP 暂不启用，避开依赖下载问题)
+# springdoc:
+#   api-docs:
+#     path: /v3/api-docs
+#   swagger-ui:
+#     path: /swagger-ui.html
+#     tags-sorter: alpha
+#     operations-sorter: method
+#   info:
+#     title: 农助手 API
+#     description: 面向中国市场的农业机械便民对接平台 API
+#     version: v1.0.0
